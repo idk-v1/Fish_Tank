@@ -3,11 +3,11 @@ var Bubbles = new Array(20).fill(new Bubble());
 
 for (var i = 0; i < 10; i++) {
     School[i] = new Fish();
+    School[i].e.addEventListener("click", FishClick);
 }
 
-var body = document.querySelector("body");
-body.style = "background-image: linear-gradient(180deg, #e66465, #9198e5);";
-//body.style = "background: #00f";
+document.querySelector("html").style = "height: 100%; margin: 0px; border: 0px; padding: 0px;";
+document.querySelector("body").style = "background-image: linear-gradient(#9abcde, #123456); margin: 0px; border: 0px; padding: 0px; z-index: -1; position: fixed;";
 
 var dlt = 0;
 var lst = performance.now();
@@ -27,6 +27,10 @@ function tick() {
     render();
 }
 
+function FishClick() {
+    window.alert("e");
+}
+
 function render() {
     for (var f = 0; f < School.length; f++) {
 
@@ -37,6 +41,7 @@ function render() {
         School[f].e.style.height = "100px";
         School[f].e.style.background = "rgb(" + School[f].r + "," + School[f].g + "," + School[f].b + ")";
         School[f].e.style.borderRadius = "25%";
+        School[f].e.style.zIndex = "100";
 
         if (School[f].d == 1) {
             School[f].efm.style = "position: absolute; left: 12.5%; top: 12.5%; width: 50px; height: 25px; border-top: 25px solid transparent; border-right: 50px solid #00000080; border-bottom: 25px solid transparent";
@@ -56,7 +61,7 @@ function update() {
     for (var f = 0; f < School.length; f++) {
 
         School[f].x += School[f].s * School[f].d;
-        if (School[f].d == 1 && School[f].x >= window.innerWidth + 300) {
+        if (School[f].d == 1 && School[f].x >= window.innerWidth * 1.5) {
             School[f].e.remove();
             School[f] = new Fish();
             School[f].e.appendChild(School[f].efm);
@@ -65,7 +70,7 @@ function update() {
             School[f].e.appendChild(School[f].ee);
             document.querySelector("body").appendChild(School[f].e);
         }
-        if (School[f].d == -1 && School[f].x <= -window.innerWidth - 300) {
+        if (School[f].d == -1 && School[f].x <= -window.innerWidth * 1.5) {
             School[f].e.remove();
             School[f] = new Fish();
             School[f].e.appendChild(School[f].efm);
