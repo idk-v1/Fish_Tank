@@ -7,7 +7,7 @@ for (var i = 0; i < 10; i++) {
 }
 
 document.querySelector("html").style = "height: 100%; margin: 0px; border: 0px; padding: 0px;";
-document.querySelector("body").style = "background-image: linear-gradient(#9abcde, #123456); margin: 0px; border: 0px; padding: 0px; z-index: -1; position: fixed;";
+document.querySelector("body").style = "background-image: linear-gradient(#9abcde, #123456); margin: 0px; border: 0px; padding: 0px; position: fixed;";
 
 var dlt = 0;
 var lst = performance.now();
@@ -41,7 +41,6 @@ function render() {
         School[f].e.style.height = "100px";
         School[f].e.style.background = "rgb(" + School[f].r + "," + School[f].g + "," + School[f].b + ")";
         School[f].e.style.borderRadius = "25%";
-        School[f].e.style.zIndex = "100";
 
         if (School[f].d == 1) {
             School[f].efm.style = "position: absolute; left: 12.5%; top: 12.5%; width: 50px; height: 25px; border-top: 25px solid transparent; border-right: 50px solid #00000080; border-bottom: 25px solid transparent";
