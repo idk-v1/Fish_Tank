@@ -4,7 +4,6 @@ var tLight = 10;
 var fSpeed = 100;
 var bSpeed = 10;
 var lScape = 1;
-var fNum = false;
 var maxR = 255;
 var minR = 0;
 var maxG = 255;
@@ -17,12 +16,23 @@ var Bubbles = new Array();
 
 var settings = false;
 var menu = document.getElementById("menu");
+
 var rmax = document.getElementById("rmax");
 var rmin = document.getElementById("rmin");
 var gmax = document.getElementById("gmax");
 var gmin = document.getElementById("gmin");
 var bmax = document.getElementById("bmax");
 var bmin = document.getElementById("bmin");
+
+var rgrad = document.getElementById("rgrad");
+var ggrad = document.getElementById("ggrad");
+var bgrad = document.getElementById("bgrad");
+
+var speedf = document.getElementById("speedf");
+var countf = document.getElementById("countf");
+
+var speedb = document.getElementById("speedb");
+var countb = document.getElementById("countb");
 
 var dlt = 0;
 var lst = performance.now();
@@ -56,10 +66,13 @@ function render() {
     }
     var body = document.querySelector("body");
     body.style.background = `linear-gradient(rgb(${154*tLight/10},${(188*tLight/10)},${(222*tLight/10)}),rgb(${(18*tLight/10)},${(52*tLight/10)},${(86*tLight/10)}))`;
+    
+    rgrad.style.backgroundImage = `linear-gradient(rgb(${maxR},0,0),rgb(${minR},0,0))`;
+    ggrad.style.backgroundImage = `linear-gradient(rgb(0,${maxG},0),rgb(0,${minG},0))`;
+    bgrad.style.backgroundImage = `linear-gradient(rgb(0,0,${maxB}),rgb(0,0,${minB}))`;
 }
 
 function update() {
-
 
     maxR = Number(rmax.value);
     minR = Number(rmin.value);
@@ -67,6 +80,9 @@ function update() {
     minG = Number(gmin.value);
     maxB = Number(bmax.value);
     minB = Number(bmin.value);
+
+    fSpeed = Number(speedf.value);
+    fCount = Number(countf.value);
 
     if (School.length < fCount) School.push(new Fish());
     if (Bubbles.length > fCount) Bubbles.pop();

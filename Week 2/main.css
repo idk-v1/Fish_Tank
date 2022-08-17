@@ -67,7 +67,7 @@ html {
     right: 50px;
     width: 50px;
     height: 50px;
-    background-color: darkgray;
+    background-color: #121212;
 }
 .setspan {
     top: -10px;
@@ -79,27 +79,74 @@ html {
 .menu {
     display: none;
     position: fixed;
-    top: 80%;
+    bottom: 0%;
     right: 150px;
-    background-color: darkgray;
+    background-color: #121212;
     width: 100%;
     height: 20%;
+    border-bottom: #121212 50px solid;
 }
+
+@font-face {
+    font-family: "7Segment";
+    src: url("7Segment.ttf");
+}
+
 .menuele {
     position: absolute;
+    text-align: right;
     width: 60px;
     font-size: 25px;
-    top: 125px;
+    top: 140px;
+    font-size: 175%;
+    font-family: "7Segment";
+    background-color: #696969;
+}
+.menufl {
+    right: 375px;
+    margin-top: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: absolute;
+    top: 140px;
+    background-color: #454545;
+    color: #fff;
+    font-size: 125%;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: right;
 }
 .menur {
     right: 50px;
+    color: #5050ff;
 }
 .menum {
     right: 125px;
+    color: #50ff50;
 }
 .menul {
     right: 200px;
+    color: #ff5050;
 }
 .menut {
-    top: 25px;
+    top: 20px;
+}
+
+.menufmt {
+    top: 60px;
+}
+
+.menufmb {
+    top: 100px;
+}
+
+.menuf {
+    right: 300px;
+    color: #fff;
+}
+
+.menugrad {
+    top: 60px;
+    width: 67px;
+    height: 75px;
+    position: absolute;
 }
