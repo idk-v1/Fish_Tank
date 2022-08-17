@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <meta name="viewport" content="initial-scale=0.5, maximum-scale=0.5, user-scalable=0"/>
 <link href="main.css" rel="stylesheet"></link>
-<body></body>
+<body>
+    <div id="settings" class="settings" onmousedown="Setting()">
+        <span class="setspan">⚙</span>
+    </div>
+    <div id="menu" class="menu">
+        <input type="number" id="rmax" min=0 max=255 value=255 class="menuele menul menut"></input>
+        <input type="number" id="rmin" min=0 max=255 value=0 class="menuele menul"></input>
+        <input type="number" id="gmax" min=0 max=255 value=255 class="menuele menum menut"></input>
+        <input type="number" id="gmin" min=0 max=255 value=0 class="menuele menum"></input>
+        <input type="number" id="bmax" min=0 max=255 value=255 class="menuele menur menut"></input>
+        <input type="number" id="bmin" min=0 max=255 value=0 class="menuele menur"></input>
+    </div>
+</body>
 <script src="main.js"></script>

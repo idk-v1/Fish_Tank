@@ -1,10 +1,10 @@
 var fCount = 10;
 var bCount = 10;
 var tLight = 10;
-var fSpeed = 10;
+var fSpeed = 100;
 var bSpeed = 10;
-var fSize = 100;
 var lScape = 1;
+var fNum = false;
 var maxR = 255;
 var minR = 0;
 var maxG = 255;
@@ -16,10 +16,13 @@ var School = new Array();
 var Bubbles = new Array();
 
 var settings = false;
-
-for (var u = 0; u < 1000; u++) {
-    update();
-}
+var menu = document.getElementById("menu");
+var rmax = document.getElementById("rmax");
+var rmin = document.getElementById("rmin");
+var gmax = document.getElementById("gmax");
+var gmin = document.getElementById("gmin");
+var bmax = document.getElementById("bmax");
+var bmin = document.getElementById("bmin");
 
 var dlt = 0;
 var lst = performance.now();
@@ -41,15 +44,29 @@ function FishClick(e) {
     School[e.currentTarget.id].s = 10;
 }
 
+function Setting() {
+    settings = !settings;
+    menu.style.display = (settings ? "block" : "none");
+}
+
 function render() {
     for (var f = 0; f < School.length; f++) {
-        School[f].e.style.left = (window.innerWidth / 2 + School[f].d * window.innerWidth / 1.5 - School[f].x - 100) + "px";
-        School[f].e.style.top = (School[f].y - 7.5) + "%";
+        School[f].e.style.left = `${window.innerWidth / 2 + School[f].d * window.innerWidth / 1.5 - School[f].x - 150}px`;
+        School[f].e.style.top = `${School[f].y - 7.5}%`;
     }
-    document.querySelector("body").style.backgroundImage = "linear-gradient(rgb(" + (154 * tLight / 10) + "," + (188 * tLight / 10) + "," + (222 * tLight / 10) + "), rgb(" + (18 * tLight / 10) + "," + (52 * tLight / 10) + "," + (86 * tLight / 10) + "))";
+    var body = document.querySelector("body");
+    body.style.background = `linear-gradient(rgb(${154*tLight/10},${(188*tLight/10)},${(222*tLight/10)}),rgb(${(18*tLight/10)},${(52*tLight/10)},${(86*tLight/10)}))`;
 }
 
 function update() {
+
+
+    maxR = Number(rmax.value);
+    minR = Number(rmin.value);
+    maxG = Number(gmax.value);
+    minG = Number(gmin.value);
+    maxB = Number(bmax.value);
+    minB = Number(bmin.value);
 
     if (School.length < fCount) School.push(new Fish());
     if (Bubbles.length > fCount) Bubbles.pop();
@@ -66,19 +83,27 @@ function update() {
                 School.splice(f, 1);
             } else {
                 School[f] = new Fish();
-                School[f].e.appendChild(School[f].efm); School[f].e.appendChild(School[f].efb); 
-                School[f].e.appendChild(School[f].eft); School[f].e.appendChild(School[f].ee); School[f].e.appendChild(School[f].t);
+                School[f].e.appendChild(School[f].efm); 
+                School[f].e.appendChild(School[f].efb); 
+                School[f].e.appendChild(School[f].eft); 
+                School[f].e.appendChild(School[f].ee); 
+                School[f].e.appendChild(School[f].t);
                 document.querySelector("body").appendChild(School[f].e);
-                if (School[f].d != 1) School[f].e.style.transform = "scaleX(-1)";
-                School[f].efm.classList.add("fin-mid"); School[f].ee.classList.add("eye"); School[f].e.classList.add("body");
-                School[f].efb.style = "position: absolute; left: 74%; top: 13%; width: 50px; height: 25px; border-top: 25px solid transparent; border-right: 38px solid rgb(" + School[f].r / 2 + "," + School[f].g / 2 + "," + School[f].b / 2 + "); border-bottom: 25px solid transparent;";
-                School[f].eft.style = "position: absolute; left: 38%; top: -24%; width: 50px; height: 25px; background: rgb(" + School[f].r / 2 + "," + School[f].g / 2 + "," + School[f].b / 2 + "); transform: skew(-20deg);";
-                School[f].e.style.backgroundColor = "rgb(" + School[f].r + "," + School[f].g + "," + School[f].b + ")";
+                School[f].efm.classList.add("fin-mid"); 
+                School[f].efb.classList.add("fin-end");
+                School[f].eft.classList.add("fin-top");
+                School[f].ee.classList.add("eye");
+                School[f].e.classList.add("body");
                 School[f].t.classList.add("text");
-                School[f].t.style.transform = "scaleX(" + School[f].d + ")";
-                School[f].t.innerText = " " + School[f].e.style.backgroundColor;
-                School[f].e.addEventListener("click", FishClick);
+                School[f].efb.style.borderRight = `38px solid rgb(${School[f].r / 2},${School[f].g / 2},${School[f].b / 2})`;
+                School[f].eft.style.background = `rgb(${School[f].r / 2},${School[f].g / 2},${School[f].b / 2})`;
+                School[f].e.style.backgroundColor = `rgb(${School[f].r},${School[f].g},${School[f].b})`;
+                School[f].efm.style.borderRight = `rgb(${School[f].r / 2},${School[f].g / 2},${School[f].b / 2}) solid 50px`;
+                School[f].t.style.transform = `scaleX(${School[f].d})`;
+                School[f].t.innerText = ` ${School[f].e.style.backgroundColor}`;
+                School[f].e.addEventListener("mousedown", FishClick);
                 School[f].e.id = f;
+                if (School[f].d != 1) School[f].e.style.transform = "scaleX(-1)";
             }
         }
     }
@@ -88,7 +113,7 @@ function Fish() {
     this.s = ((Math.random() * 2) + 1);
     this.d = (Math.floor(Math.random() * 2) == 1 ? -1 : 1);
     this.x = 0;
-    this.y = Math.floor(Math.random() * 62) + 25;
+    this.y = Math.floor(Math.random() * 51) + 25;
     this.r = Math.floor(Math.random() * (maxR - minR)) + minR;
     this.g = Math.floor(Math.random() * (maxG - minG)) + minG;
     this.b = Math.floor(Math.random() * (maxB - minB)) + minB;
