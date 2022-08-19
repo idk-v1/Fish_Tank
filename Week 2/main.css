@@ -163,3 +163,11 @@ html {
 .menumisc {
     right: 550px;
 }
+.bubble {
+    position: fixed;
+    width: 25px;
+    height: 25px;
+    background-color: #8080ff50;
+    border-radius: 50%;
+    border: solid 4px #ffffff30;
+}

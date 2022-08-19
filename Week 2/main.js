@@ -67,6 +67,11 @@ function render() {
 
         School[f].t.style.display = (color ? "block" : "none");
     }
+
+    for (var b = 0; b < Bubbles.length; b++) {
+        Bubbles[b].e.style.top = `${Bubbles[b].y}px`;
+        Bubbles[b].e.style.left = `${Bubbles[b].x}%`;
+    }
     var body = document.querySelector("body");
     body.style.background = `linear-gradient(rgb(${154*tLight/10},${(188*tLight/10)},${(222*tLight/10)}),rgb(${(18*tLight/10)},${(52*tLight/10)},${(86*tLight/10)}))`;
     
@@ -86,15 +91,31 @@ function update() {
 
     fSpeed = Number(speedf.value);
     fCount = Number(countf.value);
+    bSpeed = Number(speedb.value);
+    bCount = Number(countb.value);
 
     if (School.length < fCount) School.push(new Fish());
-    if (Bubbles.length > fCount) Bubbles.pop();
-    if (Bubbles.length < fCount) Bubbles.push(new Bubble());
+    if (Bubbles.length < bCount) Bubbles.push(new Bubble());
+
+    for (var b = 0; b < Bubbles.length; b++) {
+        Bubbles[b].y -= 5 * bSpeed / 10;
+
+        if (Bubbles[b].y < 0) {
+            Bubbles[b].e.remove();
+            if (Bubbles.length > bCount) {
+                Bubbles.splice(b, 1);
+            } else {
+                Bubbles[b] = new Bubble();
+                document.querySelector("body").appendChild(Bubbles[b].e);
+                Bubbles[b].e.classList.add("bubble");
+            }
+        }
+    }
 
     for (var f = 0; f < School.length; f++) {
 
         School[f].x += School[f].s * School[f].d * fSpeed / 10;
-
+        
         if ((School[f].d == 1 && School[f].x >= window.innerWidth * 1.5) || 
         (School[f].d == -1 && School[f].x <= -window.innerWidth * 1.5)) {
             School[f].e.remove(); 
@@ -148,8 +169,7 @@ function Fish() {
 }
 
 function Bubble() {
-    this.s = ((Math.random() * 2) + 1);
-    this.x = -((Math.random() * 5) - 1);
-    this.y = Math.floor(Math.random() * 51) + 25;
+    this.y = Math.floor(Math.random() * 500) + window.innerHeight;
+    this.x = Math.floor(Math.random() * 101);
     this.e = document.createElement("div");
 }
