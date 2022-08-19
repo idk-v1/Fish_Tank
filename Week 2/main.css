@@ -60,6 +60,8 @@ html {
     color: #fff;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     font-size: 150%;
+    display: none;
+    font-family: 'Courier New', Courier, monospace;
 }
 .settings {
     position: fixed;
@@ -149,4 +151,15 @@ html {
     width: 67px;
     height: 75px;
     position: absolute;
+}
+
+.menubutton {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    border: solid 2px #454545;
+}
+
+.menumisc {
+    right: 550px;
 }

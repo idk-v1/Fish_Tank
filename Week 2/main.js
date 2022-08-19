@@ -10,6 +10,7 @@ var maxG = 255;
 var minG = 0;
 var maxB = 255;
 var minB = 0;
+var color = false;
 
 var School = new Array();
 var Bubbles = new Array();
@@ -63,6 +64,8 @@ function render() {
     for (var f = 0; f < School.length; f++) {
         School[f].e.style.left = `${window.innerWidth / 2 + School[f].d * window.innerWidth / 1.5 - School[f].x - 150}px`;
         School[f].e.style.top = `${School[f].y - 7.5}%`;
+
+        School[f].t.style.display = (color ? "block" : "none");
     }
     var body = document.querySelector("body");
     body.style.background = `linear-gradient(rgb(${154*tLight/10},${(188*tLight/10)},${(222*tLight/10)}),rgb(${(18*tLight/10)},${(52*tLight/10)},${(86*tLight/10)}))`;
@@ -116,10 +119,13 @@ function update() {
                 School[f].e.style.backgroundColor = `rgb(${School[f].r},${School[f].g},${School[f].b})`;
                 School[f].efm.style.borderRight = `rgb(${School[f].r / 2},${School[f].g / 2},${School[f].b / 2}) solid 50px`;
                 School[f].t.style.transform = `scaleX(${School[f].d})`;
-                School[f].t.innerText = ` ${School[f].e.style.backgroundColor}`;
                 School[f].e.addEventListener("mousedown", FishClick);
                 School[f].e.id = f;
                 if (School[f].d != 1) School[f].e.style.transform = "scaleX(-1)";
+
+                School[f].t.innerHTML = "<span style='color:" + (School[f].r == 255 || School[f].r == 0 ? "#ff0" : "#fff") + "'>" + (School[f].r).toString().padStart(3, '0') + 
+                "</span>, <span style='color:" + (School[f].g == 255 || School[f].g == 0 ? "#ff0" : "#fff") + "'>" + (School[f].g).toString().padStart(3, '0') + 
+                "</span>, <span style='color:" + (School[f].b == 255 || School[f].b == 0 ? "#ff0" : "#fff") + "'>" + (School[f].b).toString().padStart(3, '0') + "</span>";
             }
         }
     }
