@@ -1,1 +1,1 @@
-let debug = true;
+debug = true
